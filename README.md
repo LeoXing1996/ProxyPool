@@ -1,2 +1,19 @@
 # ProxyPool
-To be used to get proxy-list but unfinished........
+## 直接使用
+
+* 自动检测当前目录下是否存在命名为`Proxy.csv`的文件
+* 检测到则提示是否重新获取，未检测到则自动获取代理信息，
+* 信息获取结束后（或不重新获取）提示是否更新代理信息
+* __默认`timeout==3`，可能出现由于网络原因代理大量无效的情况，更新后提示检测数，通过数以及是否修改代理信息文件__
+
+## 调用
+* 尚未测试.....
+
+## 一些说明
+
+* 代理信息来自"http://www.xicidaili.com/", 带么也针对该网站设计，其他网站可能无法适配
+* 默认爬取3页（300条）代理信息，死的很多，最好更新
+* 默认的`{"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' \
+                          ' AppleWebKit/537.36 (KHTML, like Gecko) ' \
+                          'Chrome/61.0.3163.100 Safari/537.36'}`
+* 默认的文件保存位置`Proxy.csv`

@@ -16,6 +16,7 @@ class get_proxy:
                           'Chrome/61.0.3163.100 Safari/537.36'
         self.header = {"User-Agent": self.user_agent}
         self.proxy_file_name = 'Proxy.csv'
+        self.time = 3
         if os.path.isfile(self.proxy_file_name):
             self.gotten = 1
         else:
@@ -99,7 +100,7 @@ class get_proxy:
             count_url += 1
             print(proxy, '正在测试中(第',count_url,'个，共', task_num,'个)')
             try:
-                r = requests.get(url, headers= self.header, proxies=proxy, timeout = 3)
+                r = requests.get(url, headers= self.header, proxies=proxy, timeout = self.time)
                 if r.status_code == 200:
                     print('通过测试！')
                 else:
