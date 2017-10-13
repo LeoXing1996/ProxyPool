@@ -15,8 +15,8 @@ class get_proxy:
                           ' AppleWebKit/537.36 (KHTML, like Gecko) ' \
                           'Chrome/61.0.3163.100 Safari/537.36'
         self.header = {"User-Agent": self.user_agent}
-        self.proxy_flie_name = 'Proxy.csv'
-        if os.path.isfile(self.proxy_flie_name):
+        self.proxy_file_name = 'Proxy.csv'
+        if os.path.isfile(self.proxy_file_name):
             self.gotten = 1
         else:
             self.gotten = 0
@@ -62,7 +62,7 @@ class get_proxy:
         print('开始写入')
         proxy_frame = DataFrame(proxy)
         if name != 'Proxy.csv':
-            self.proxy_flie_name = name
+            self.proxy_file_name = name
         proxy_frame.to_csv(name, encoding='')
 
         print('保存完成,部分代理数据展示如下：')
@@ -71,7 +71,7 @@ class get_proxy:
 
     # 只含有IP和端口，用来调用
     def proxy_list(self):
-        with open(self.proxy_flie_name) as file:
+        with open(self.proxy_file_name) as file:
             proxy_reader = csv.reader(file)
             next(proxy_reader)
             pro_list = []
@@ -80,7 +80,7 @@ class get_proxy:
             return pro_list
 
     def present_proxy(self):
-        return pd.read_csv(self.proxy_flie_name, encoding='gb2312')
+        return pd.read_csv(self.proxy_file_name, encoding='gb2312')
 
     def find_dead(self):
         test_url = ['http://baidu.com', 'http://qq.com', 'http://zhihu.com']
@@ -124,7 +124,7 @@ class get_proxy:
             new_proxy = []
             print('开始更新')
 
-            with open(self.proxy_flie_name, 'r') as file:
+            with open(self.proxy_file_name, 'r') as file:
                 reader = csv.reader(file)
                 for i in reader:
                     if i[3] in proxies_tobe_removed:
@@ -133,7 +133,7 @@ class get_proxy:
                         new_proxy.append(i[1:])
 
             proxy_frame = DataFrame(new_proxy)
-            proxy_frame.to_csv(self.proxy_flie_name, encoding='')
+            proxy_frame.to_csv(self.proxy_file_name, encoding='')
 
             self.freshen = 1
         else:
@@ -143,7 +143,7 @@ class get_proxy:
 if __name__ == '__main__':
     proxy = get_proxy()
     if proxy.gotten == 1:
-        print('Proxy List is saved in:', proxy.proxy_flie_name)
+        print('Proxy List is saved in:', proxy.proxy_file_name)
         print("是否重新获取？ [Y/N]")
         exc = input()
         if exc == 'Y' or exc == 'y':
